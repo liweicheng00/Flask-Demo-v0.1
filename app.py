@@ -10,8 +10,8 @@ if env:
 else:
     env = 'development'
 
-app = Flask(__name__, static_folder='templates', instance_relative_config=True)
-# app = Flask(__name__, static_folder='static', instance_relative_config=True)
+# app = Flask(__name__, static_folder='templates', instance_relative_config=True)
+app = Flask(__name__, static_folder='static', instance_relative_config=True)
 
 app.config.from_object(config[env])  # from ./config.py
 
@@ -24,6 +24,7 @@ except OSError:
 
 app.config.from_pyfile('config.py')  # from ./instance/config.py
 app_config = app.config
+# print(app_config)
 
 from model import *
 
@@ -39,7 +40,7 @@ def hello():
     return 'Hello, {}! {}'.format(q_user.name, app.config['SQLALCHEMY_URL'])
 
 
-@app.route('/demo')
+@app.route('/bootstrap_demo')
 def demo():
     return render_template('bootstrap_demo.html')
 
@@ -52,3 +53,4 @@ def hello_world():
 if __name__ == '__main__':
     # app.run()
     app.run(host='0.0.0.0')
+
